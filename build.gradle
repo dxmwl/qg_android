@@ -23,6 +23,8 @@ buildscript {
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31'
         // AOP 配置插件：https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'
+        //Gromore自动拉取 Adapre AAR 插件脚本
+        classpath 'com.pangle.cn:mediation-auto-adapter:1.0.3'
     }
 }
 

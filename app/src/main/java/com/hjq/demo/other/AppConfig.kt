@@ -64,4 +64,12 @@ object AppConfig {
     fun getHostUrl(): String {
         return BuildConfig.HOST_URL
     }
+
+    /**
+     * 获取渠道
+     */
+    fun getChannel(): String {
+        var channelName = "guanfang"
+        return channelName
+    }
 }

@@ -43,4 +43,8 @@
         android:textSize="@dimen/sp_18"
         android:textStyle="bold" />
 
+    <FrameLayout
+        android:id="@+id/ad_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </FrameLayout>

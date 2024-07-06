@@ -11,6 +11,12 @@ static def addCommonMaven(RepositoryHandler handler) {
     handler.google()
     // noinspection JcenterRepositoryObsolete
     handler.jcenter()
+    handler.maven {
+        url "https://artifact.bytedance.com/repository/pangle"
+    }
+    handler.maven {
+        url 'https://artifact.bytedance.com/repository/Volcengine/'
+    }
 }
 
 ext.addCommonMaven = this.&addCommonMaven

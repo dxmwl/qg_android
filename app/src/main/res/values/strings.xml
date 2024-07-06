@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">安卓技术中台</string>
+    <string name="app_name">青果短剧</string>
 
     <!-- 通用的 -->
     <string name="common_loading">加载中&#8230;</string>
@@ -153,7 +153,7 @@
     <string name="home_exit_hint">再按一次退出</string>
     <string name="home_nav_index">首页</string>
     <string name="home_nav_found">发现</string>
-    <string name="home_nav_message">消息</string>
+    <string name="home_nav_message">短视频</string>
     <string name="home_nav_me">我的</string>
 
     <!-- 登录 -->

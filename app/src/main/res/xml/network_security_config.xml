@@ -2,5 +2,10 @@
 <!-- 解决 Android P 禁用 http 请求的问题 -->
 <network-security-config>
     <!-- 允许明文通信 -->
-    <base-config cleartextTrafficPermitted="true" />
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="user" />
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
 </network-security-config>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/shape_vip_dialog_bg"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingTop="24dp"
+    android:paddingRight="12dp"
+    android:paddingBottom="24dp">
+
+    <ImageView
+        android:id="@+id/iv_vip_close"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_gravity="end"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_lock_close"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:text="选择套餐"
+        android:textColor="#000"
+        android:textSize="16sp"
+        tools:ignore="HardcodedText" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_vip_goods"
+        android:layout_width="match_parent"
+        android:layout_height="157dp" />
+
+    <TextView
+        android:id="@+id/tv_vip_btn_pay"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/shape_vip_dialog_btn_pay"
+        android:gravity="center"
+        android:text="立即支付"
+        android:textColor="#FFF"
+        android:textSize="15sp"
+        tools:ignore="HardcodedText" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/rb_vip_agree"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/selector_vip_dialog_agree"
+            android:button="@null"
+            android:padding="0dp" />
+
+        <TextView
+            android:id="@+id/tv_vip_agree_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:alpha="0.8"
+            android:textColor="#000"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText"
+            tools:text="我已阅读并同意《服务协议》" />
+
+    </LinearLayout>
+
+</LinearLayout>

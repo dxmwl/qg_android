@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.hjq.shape.view.ShapeEditText
+                android:id="@+id/input_content"
+                app:shape_solidColor="#EDEDED"
+                app:shape_radius="30dp"
+                android:lines="1"
+                android:paddingHorizontal="15dp"
+                android:hint="请输入搜索内容"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/btn_search"
+                android:layout_marginEnd="15dp"
+                android:text="搜索"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </com.hjq.bar.TitleBar>
+
+
+</LinearLayout>

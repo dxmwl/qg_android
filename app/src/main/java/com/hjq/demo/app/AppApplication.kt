@@ -26,6 +26,9 @@ import com.hjq.http.model.HttpHeaders
 import com.hjq.http.model.HttpParams
 import com.hjq.toast.ToastUtils
 import com.hjq.umeng.UmengClient
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+import com.orhanobut.logger.PrettyFormatStrategy
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.tencent.bugly.crashreport.CrashReport
@@ -44,6 +47,9 @@ class AppApplication : Application() {
     @Log("启动耗时")
     override fun onCreate() {
         super.onCreate()
+
+        appLication = this
+
         initSdk(this)
     }
 
@@ -61,19 +67,31 @@ class AppApplication : Application() {
 
     companion object {
 
+        private lateinit var appLication: Application
+
+        fun getApplication(): Application {
+            return appLication
+        }
+
         /**
          * 初始化一些第三方框架
          */
         fun initSdk(application: Application) {
+            initLogger()
             // 设置标题栏初始化器
             TitleBar.setDefaultStyle(TitleBarStyle())
 
             // 设置全局的 Header 构建器
-            SmartRefreshLayout.setDefaultRefreshHeaderCreator{ context: Context, layout: RefreshLayout ->
-                MaterialHeader(context).setColorSchemeColors(ContextCompat.getColor(context, R.color.common_accent_color))
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context: Context, layout: RefreshLayout ->
+                MaterialHeader(context).setColorSchemeColors(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.common_accent_color
+                    )
+                )
             }
             // 设置全局的 Footer 构建器
-            SmartRefreshLayout.setDefaultRefreshFooterCreator{ context: Context, layout: RefreshLayout ->
+            SmartRefreshLayout.setDefaultRefreshFooterCreator { context: Context, layout: RefreshLayout ->
                 SmartBallPulseFooter(context)
             }
             // 设置全局初始化器
@@ -146,9 +164,11 @@ class AppApplication : Application() {
             }
 
             // 注册网络状态变化监听
-            val connectivityManager: ConnectivityManager? = ContextCompat.getSystemService(application, ConnectivityManager::class.java)
+            val connectivityManager: ConnectivityManager? =
+                ContextCompat.getSystemService(application, ConnectivityManager::class.java)
             if (connectivityManager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
+                connectivityManager.registerDefaultNetworkCallback(object :
+                    ConnectivityManager.NetworkCallback() {
                     override fun onLost(network: Network) {
                         val topActivity: Activity? = ActivityManager.getInstance().getTopActivity()
                         if (topActivity !is LifecycleOwner) {
@@ -162,6 +182,21 @@ class AppApplication : Application() {
                     }
                 })
             }
+        }
+
+        private fun initLogger() {
+            val formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false)     // （可选）是否显示线程信息。 默认值为true
+                .methodCount(5)            //（可选）要显示的方法行数。 默认2
+                .methodOffset(0)           //（可选）设置调用堆栈的函数偏移值，0的话则从打印该Log的函数开始输出堆栈信息，默认是0
+                //.logStrategy(customLog)  //（可选）更改要打印的日志策略。 默认LogCat
+                .tag("Yimulin") //（可选）TAG内容. 默认是 PRETTY_LOGGER
+                .build()
+            Logger.addLogAdapter(object : AndroidLogAdapter(formatStrategy) {
+                override fun isLoggable(priority: Int, tag: String?): Boolean {
+                    return true
+                }
+            })
         }
     }
 }

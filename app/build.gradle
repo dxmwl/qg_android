@@ -1,7 +1,8 @@
-apply plugin : 'com.android.application'
-apply plugin : 'android-aspectjx'
-apply plugin : 'kotlin-kapt'
-apply from : '../common.gradle'
+apply plugin: 'com.android.application'
+apply plugin: 'android-aspectjx'
+apply plugin: 'kotlin-kapt'
+apply from: '../common.gradle'
+apply plugin: 'mediation-auto-adapter'
 
 // Android 代码规范文档：https://github.com/getActivity/AndroidCodeStandard
 android {
@@ -10,7 +11,7 @@ android {
     defaultConfig {
 
         // 无痛修改包名：https://www.jianshu.com/p/17327e191d2e
-        applicationId 'com.hjq.demo'
+        applicationId 'com.yimulin.mobile'
 
         // 仅保留中文语种的资源
         resConfigs 'zh'
@@ -58,7 +59,7 @@ android {
             signingConfig signingConfigs.config
             // 添加清单占位符
             addManifestPlaceholders([
-                    'app_name'    :    '安卓技术中台 Debug 版'
+                    'app_name': '青果短剧 Debug 版'
             ])
             // 调试模式下只保留一种架构的 so 库，提升打包速度
             ndk {
@@ -71,7 +72,7 @@ android {
             applicationIdSuffix ''
             // 添加清单占位符
             addManifestPlaceholders([
-                    'app_name'    :    '安卓技术中台 Preview 版'
+                    'app_name': '青果短剧 Preview 版'
             ])
         }
 
@@ -89,14 +90,14 @@ android {
             signingConfig signingConfigs.config
             // 添加清单占位符
             addManifestPlaceholders([
-                    'app_name'    :    '@string/app_name'
+                    'app_name': '@string/app_name'
             ])
             // 仅保留两种架构的 so 库，根据 Bugly 统计得出
             ndk {
                 // armeabi：万金油架构平台（占用率：0%）
                 // armeabi-v7a：曾经主流的架构平台（占用率：10%）
                 // arm64-v8a：目前主流架构平台（占用率：95%）
-                abiFilters 'armeabi-v7a', 'arm64-v8a'
+                abiFilters 'arm64-v8a'
             }
         }
     }
@@ -129,6 +130,16 @@ android {
     }
 }
 
+mediationAutoAdapter {
+    //自动适配adn 所有adn adapter，默认值为true，如果为false脚本功能全部关闭
+    autoUpdate true
+    //如果不想全部自动适配，可选择此项，默认值为空[]，可以不填写
+    //如果autoUpdate设置成false，此项不生效，不会自动适配adn adapter
+    //如果autoUpdate设置成true，autoUpdateAdn配置了adn，则生效配置的adn。
+    //autoUpdateAdn没有配置adn，自动适配所有的adn
+    autoUpdateAdn = ["gdt", "baidu", "ks"]
+}
+
 // 添加构建依赖项：https://developer.android.google.cn/studio/build/dependencies
 // api 与 implementation 的区别：https://www.jianshu.com/p/8962d6ba936e
 dependencies {
@@ -138,6 +149,8 @@ dependencies {
     implementation project(':library:widget')
     // 友盟封装
     implementation project(':library:umeng')
+
+    implementation "androidx.core:core-ktx:1.2.0"
 
     // 权限请求框架：https://github.com/getActivity/XXPermissions
     implementation 'com.github.getActivity:XXPermissions:12.3'
@@ -200,6 +213,37 @@ dependencies {
     // 内存泄漏监测框架：https://github.com/square/leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
     previewImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+
+    //穿山甲广告 https://www.csjplatform.com/union/media/union/quicksdk/?sdk_name=csj&platform=android&version=5.7.0.5
+    implementation "com.pangle.cn:mediation-sdk:5.9.0.8"  //融合SDK
+
+    implementation "com.pangle.cn:mediation-ks-adapter:3.3.57.0"//ks adapter
+
+    implementation "com.pangle.cn:mediation-gdt-adapter:4.561.1431.0" //gdt adapter
+
+    implementation "com.pangle.cn:mediation-baidu-adapter:9.332.0"//baidu adapter
+
+    //穿山甲AppLog https://www.csjplatform.com/union/media/union/growth/applog/content/5465946
+    implementation 'com.bytedance.applog:RangersAppLog-Lite-cn:6.15.3'
+
+    //为保证兼容性 建议使用广告SDK版本
+//    implementation 'com.pangle.cn:ads-sdk-pro:5.6.1.5'
+    implementation('com.pangle.cn:pangrowth-sdk:4.1.1.0') {
+        exclude group: 'com.pangle.cn', module: 'partner-live-sdk'
+        exclude group: 'com.pangle.cn', module: 'pangrowth-novel-sdk'
+        exclude group: 'com.pangle.cn', module: 'pangrowth-game-sdk'
+        exclude group: 'com.pangle.cn', module: 'pangrowth-luckycat-sdk'
+        exclude group: 'com.pangle.cn', module: 'pangrowth-reward-sdk'
+        exclude group: 'com.pangle.cn', module: 'partner-luckycat-api-sdk'
+        exclude group: 'com.pangle.cn', module: 'pangrowth-luckycat-api'
+    }
+    implementation 'com.pangle.cn:pangrowth-djx-sdk:1.1.5.0'
+//    implementation 'com.pangle.cn:pangrowth-empay-sdk:1.1.5.0'
+
+    implementation 'com.orhanobut:logger:2.2.0'
+
+    //工具库 https://github.com/Blankj/AndroidUtilCode/blob/master/lib/utilcode/README-CN.md
+    implementation 'com.blankj:utilcodex:1.31.1'
 
     // 多语种：https://github.com/getActivity/MultiLanguages
     // 悬浮窗：https://github.com/getActivity/XToast

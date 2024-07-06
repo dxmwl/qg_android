@@ -1,18 +1,26 @@
 package com.hjq.demo.ui.fragment
 
-import android.view.View
-import android.widget.ImageView
-import com.bumptech.glide.load.MultiTransformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bytedance.sdk.djx.DJXSdk
+import com.bytedance.sdk.djx.model.DJXDramaDetailConfig
+import com.bytedance.sdk.djx.model.DJXDramaUnlockAdMode
+import com.bytedance.sdk.djx.params.DJXWidgetDramaDetailParams
+import com.bytedance.sdk.djx.params.DJXWidgetDrawParams
+import com.bytedance.sdk.djx.params.DJXWidgetDrawParams.DRAW_CHANNEL_TYPE_RECOMMEND_THEATER
+import com.bytedance.sdk.djx.params.DJXWidgetDrawParams.DRAW_CONTENT_TYPE_ONLY_DRAMA
+import com.bytedance.sdk.dp.DPWidgetDrawParams.DRAW_CHANNEL_TYPE_RECOMMEND
 import com.hjq.demo.R
-import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.TitleBarFragment
-import com.hjq.demo.http.glide.GlideApp
+import com.hjq.demo.ui.activity.DjPlayActivity
 import com.hjq.demo.ui.activity.HomeActivity
-import com.hjq.widget.view.CountdownView
+import com.hjq.demo.utils.djUtils.DJXHolder.FREE_SET
+import com.hjq.demo.utils.djUtils.DJXHolder.LOCK_SET
+import com.hjq.demo.utils.djUtils.DefaultAdListener
+import com.hjq.demo.utils.djUtils.DefaultDramaListener
+import com.hjq.demo.utils.djUtils.DefaultDramaUnlockListener
+import com.hjq.demo.utils.djUtils.DefaultDrawListener
 import com.hjq.widget.view.SwitchButton
+import com.orhanobut.logger.Logger
+
 
 /**
  *    author : Android 轮子哥
@@ -30,44 +38,74 @@ class FindFragment : TitleBarFragment<HomeActivity>(),
         }
     }
 
-    private val circleView: ImageView? by lazy { findViewById(R.id.iv_find_circle) }
-    private val cornerView: ImageView? by lazy { findViewById(R.id.iv_find_corner) }
-    private val switchButton: SwitchButton? by lazy { findViewById(R.id.sb_find_switch) }
-    private val countdownView: CountdownView? by lazy { findViewById(R.id.cv_find_countdown) }
+    private var mBottomOffset = -1 // 底部标题文案、进度条、评论按钮底部偏移
+
+    private var mTitleTopMargin = -1 // 标题栏上边距
+
+    private var mTitleLeftMargin = -1 // 标题栏左边间距
+
+    private var mTitleRightMargin = -1 // 标题栏右边间距
+
+    private var mDrawContentType = DRAW_CONTENT_TYPE_ONLY_DRAMA // draw流类型
+
+    private var mDrawChannelType: Int = DRAW_CHANNEL_TYPE_RECOMMEND_THEATER // 沉浸式小视频频道，默认包含推荐和关注频道
+
+    private var mIsHideChannelName = false // 是否隐藏频道名称
+
+    private var mIsHideDramaInfo = false // 是否隐藏底部短剧信息
+
+    private var mIsHideDramaEnter = false // 是否隐藏底部短剧入口
+
 
     override fun getLayoutId(): Int {
         return R.layout.find_fragment
     }
 
     override fun initView() {
-        setOnClickListener(countdownView)
-        switchButton?.setOnCheckedChangeListener(this)
+        val dramaDetailConfig =
+            DJXDramaDetailConfig.obtain(
+                DJXDramaUnlockAdMode.MODE_COMMON,
+                FREE_SET,
+                DefaultDramaUnlockListener(LOCK_SET, null)
+            ).apply {
+                listener(DefaultDramaListener(null))
+                adListener(DefaultAdListener(null))
+            }
+
+        val dpWidget = DJXSdk.factory().createDraw(
+            DJXWidgetDrawParams.obtain().apply {
+                adOffset(0) //单位 dp，为 0 时可以不设置
+                drawContentType(mDrawContentType)
+                drawChannelType(mDrawChannelType)
+                hideChannelName(mDrawChannelType == DJXWidgetDrawParams.DRAW_CHANNEL_TYPE_RECOMMEND)
+                hideDramaInfo(mIsHideDramaInfo)
+                hideDramaEnter(mIsHideDramaEnter)
+//                dramaFree(dramaFree)
+//                topDramaId(dramaTopId.toLong())
+                hideClose(false, null)
+                listener(DefaultDrawListener(null))
+                adListener(DefaultAdListener(null))
+                if (true) {
+                    setEnterDelegate { context, drama, current ->
+//                        DramaDetailActivity.outerDrama = drama
+//                        DramaDetailActivity.enterFrom = enterFrom
+//                        val intent = Intent(context, DramaDetailActivity::class.java)
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                        intent.putExtra(DramaDetailConfigActivity.KEY_DRAMA_PLAY_DURATION, current)
+//                        context.startActivity(intent)
+                        DjPlayActivity.start(requireContext(), drama.id, drama.index)
+                    }
+                } else {
+                    detailConfig(dramaDetailConfig)
+                }
+            }
+        )
+        childFragmentManager.beginTransaction().replace(R.id.fl_container, dpWidget.fragment)
+            .commit()
     }
 
     override fun initData() {
-        circleView?.let {
-            // 显示圆形的 ImageView
-            GlideApp.with(this)
-                .load(R.drawable.update_app_top_bg)
-                .transform(MultiTransformation(CenterCrop(), CircleCrop()))
-                .into(it)
-        }
 
-        cornerView?.let {
-            // 显示圆角的 ImageView
-            GlideApp.with(this)
-                .load(R.drawable.update_app_top_bg)
-                .transform(MultiTransformation(CenterCrop(), RoundedCorners(resources.getDimension(R.dimen.dp_10).toInt())))
-                .into(it)
-        }
-    }
-
-    @SingleClick
-    override fun onClick(view: View) {
-        if (view === countdownView) {
-            toast(R.string.common_code_send_hint)
-            countdownView?.start()
-        }
     }
 
     override fun isStatusBarEnabled(): Boolean {

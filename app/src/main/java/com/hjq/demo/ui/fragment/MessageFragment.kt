@@ -1,16 +1,15 @@
 package com.hjq.demo.ui.fragment
 
-import android.view.View
-import android.widget.ImageView
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.bytedance.sdk.dp.DPSdk
+import com.bytedance.sdk.dp.DPWidgetDrawParams
+import com.bytedance.sdk.dp.IDPDrawListener
 import com.hjq.demo.R
-import com.hjq.demo.aop.Permissions
-import com.hjq.demo.aop.SingleClick
 import com.hjq.demo.app.TitleBarFragment
-import com.hjq.demo.http.glide.GlideApp
 import com.hjq.demo.ui.activity.HomeActivity
-import com.hjq.permissions.Permission
-import com.hjq.permissions.XXPermissions
+import com.orhanobut.logger.Logger
+
 
 /**
  *    author : Android 轮子哥
@@ -27,18 +26,12 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
         }
     }
 
-    private val imageView: ImageView? by lazy { findViewById(R.id.iv_message_image) }
-
     override fun getLayoutId(): Int {
         return R.layout.message_fragment
     }
 
     override fun initView() {
-        setOnClickListener(
-            R.id.btn_message_image1, R.id.btn_message_image2, R.id.btn_message_image3,
-            R.id.btn_message_toast, R.id.btn_message_permission, R.id.btn_message_setting,
-            R.id.btn_message_black, R.id.btn_message_white, R.id.btn_message_tab
-        )
+        initDrawWidget()
     }
 
     override fun initData() {}
@@ -48,72 +41,45 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
         return !super.isStatusBarEnabled()
     }
 
-    @SingleClick
-    override fun onClick(view: View) {
-        when (view.id) {
-            R.id.btn_message_image1 -> {
-
-                imageView?.let {
-                    it.visibility = View.VISIBLE
-                    GlideApp.with(this)
-                        .load("https://www.baidu.com/img/bd_logo.png")
-                        .into(it)
+    private fun initDrawWidget() {
+        val mIDPWidget = DPSdk.factory().createDraw(DPWidgetDrawParams.obtain()
+            .adOffset(49) //单位 dp
+            .hideClose(false, null)
+            .listener(object : IDPDrawListener() {
+                override fun onDPRefreshFinish() {
+                    Logger.d("onDPRefreshFinish")
                 }
-            }
-            R.id.btn_message_image2 -> {
 
-                imageView?.let {
-                    it.visibility = View.VISIBLE
-                    GlideApp.with(this)
-                        .load("https://www.baidu.com/img/bd_logo.png")
-                        .circleCrop()
-                        .into(it)
+                override fun onDPPageChange(position: Int) {
+                    Logger.d("onDPPageChange: $position")
                 }
-            }
-            R.id.btn_message_image3 -> {
 
-                imageView?.let {
-                    it.visibility = View.VISIBLE
-                    GlideApp.with(this)
-                        .load("https://www.baidu.com/img/bd_logo.png")
-                        .transform(RoundedCorners(resources.getDimension(R.dimen.dp_20).toInt()))
-                        .into(it)
+                override fun onDPVideoPlay(map: Map<String, Any>) {
+                    Logger.d("onDPVideoPlay")
                 }
-            }
-            R.id.btn_message_toast -> {
 
-                toast("我是吐司")
+                override fun onDPVideoOver(map: Map<String, Any>) {
+                    Logger.d("onDPVideoOver")
+                }
 
-            }
-            R.id.btn_message_permission -> {
+                override fun onDPClose() {
+                    Logger.d("onDPClose")
+                }
 
-                requestPermission()
-            }
-            R.id.btn_message_setting -> {
-
-                XXPermissions.startPermissionActivity(this)
-            }
-            R.id.btn_message_black -> {
-
-                getStatusBarConfig()
-                    .statusBarDarkFont(true)
-                    .init()
-            }
-            R.id.btn_message_white -> {
-
-                getStatusBarConfig()
-                    .statusBarDarkFont(false)
-                    .init()
-            }
-            R.id.btn_message_tab -> {
-
-                HomeActivity.start(getAttachActivity()!!, HomeFragment::class.java)
-            }
-        }
+                override fun onDPReportResult(isSucceed: Boolean) {
+                    Logger.d("onDPReportResult")
+                    if (isSucceed) {
+                        toast("举报成功")
+                    } else {
+                        toast("举报失败，请稍后再试")
+                    }
+                }
+            })
+        )
+        val fragment = mIDPWidget.fragment
+        childFragmentManager.beginTransaction().replace(R.id.fl_container, fragment)
+            .commit()
     }
 
-    @Permissions(Permission.CAMERA)
-    private fun requestPermission() {
-        toast("获取摄像头权限成功")
-    }
+
 }
