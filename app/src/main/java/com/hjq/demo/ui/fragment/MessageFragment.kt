@@ -42,6 +42,9 @@ class MessageFragment : TitleBarFragment<HomeActivity>() {
     }
 
     private fun initDrawWidget() {
+        if (!DPSdk.isStartSuccess()) {
+            return
+        }
         val mIDPWidget = DPSdk.factory().createDraw(DPWidgetDrawParams.obtain()
             .adOffset(49) //单位 dp
             .hideClose(false, null)
