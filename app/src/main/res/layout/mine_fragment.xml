@@ -11,6 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:leftIcon="@null"
+        app:titleStyle="bold"
+        app:titleColor="@color/title_color"
+        app:lineVisible="false"
+        android:background="@color/title_bar_bg"
         app:title="@string/home_nav_me" />
 
     <com.hjq.shape.layout.ShapeConstraintLayout
@@ -20,10 +24,11 @@
         android:layout_marginTop="20dp"
         android:padding="10dp"
         app:shape_radius="15dp"
-        app:shape_solidColor="@color/white">
+        app:shape_solidColor="@color/layout_card_bg">
 
         <TextView
             android:id="@+id/textView7"
+            android:textColor="@color/title_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="浏览历史"

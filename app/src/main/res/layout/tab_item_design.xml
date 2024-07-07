@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/dp_12"
         android:textSize="@dimen/sp_15"
-        app:shape_textColor="@color/black25"
+        app:shape_textColor="@color/tab_title_color"
         app:shape_textSelectedColor="@color/common_accent_color"
         tools:text="我是标签" />
 
