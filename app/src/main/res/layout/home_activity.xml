@@ -17,7 +17,7 @@
         android:id="@+id/rv_home_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/home_bottom_bar_bg"
         android:elevation="@dimen/dp_10"
         android:orientation="vertical"
         app:spanCount="4"

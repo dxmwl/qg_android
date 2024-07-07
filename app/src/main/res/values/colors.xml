@@ -21,5 +21,13 @@
     <color name="common_confirm_text_color">#007AFF</color>
     <!-- 对话框取消按钮的文本颜色 -->
     <color name="common_cancel_text_color">#F44336</color>
+    <color name="home_bottom_bar_bg">#FFFFFF</color>
+    <color name="home_tab_layout_bg">#FFFFFF</color>
+    <color name="item_dj_title">#292929</color>
+    <color name="layout_card_bg">#FFFFFF</color>
+    <color name="tab_title_color">#40000000</color>
+    <color name="tab_title_selected_color">#000000</color>
+    <color name="title_bar_bg">#FFFFFF</color>
+    <color name="title_color">#000000</color>
 
 </resources>

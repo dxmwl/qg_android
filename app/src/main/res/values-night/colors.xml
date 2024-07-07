@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="common_window_background_color">#121212</color>
+    <color name="home_bottom_bar_bg">#222222</color>
+    <color name="home_tab_layout_bg">#222222</color>
+    <color name="item_dj_title">#FFFFFF</color>
+    <color name="layout_card_bg">#222222</color>
+    <color name="tab_title_color">#707070</color>
+    <color name="tab_title_selected_color">#5A8DDF</color>
+    <color name="title_bar_bg">#222222</color>
+    <color name="title_color">#999999</color>
+</resources>
