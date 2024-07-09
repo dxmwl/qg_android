@@ -15,7 +15,7 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="@dimen/dp_5"
         android:paddingVertical="@dimen/dp_12"
-        app:shape_textColor="@color/black25"
+        app:shape_textColor="@color/tab_title_color"
         app:shape_textSelectedColor="@color/common_accent_color"
         tools:text="我是标签"
         tools:textSize="@dimen/sp_15" />
