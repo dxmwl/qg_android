@@ -1,8 +1,13 @@
-apply plugin: 'com.android.application'
-apply plugin: 'android-aspectjx'
-apply plugin: 'kotlin-kapt'
-apply from: '../common.gradle'
-apply plugin: 'mediation-auto-adapter'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'io.github.wurensen.android-aspectjx'
+    id 'kotlin-kapt'
+    id 'com.tencent.vasdolly'
+    id 'mediation-auto-adapter'
+}
+
+apply from : '../common.gradle'
 
 // Android 代码规范文档：https://github.com/getActivity/AndroidCodeStandard
 android {
