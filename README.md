@@ -1,7 +1,7 @@
 # 青果短剧  
 这是一个免费观看短剧、短视频的开源项目，供大家免费学习使用，如有商用需求，请及时联系我获取商用授权，并在底部展示已授权用户信息，未经允许，禁止商用
 
-<img src="./pictures/扫码_搜索联合传播样式-标准色版.png" style="border:2px solid #f4f4f4;border-radius:10px"/>
+<img src="./picture/扫码_搜索联合传播样式-标准色版.png" style="border:2px solid #f4f4f4;border-radius:10px"/>
 
 ## 配置修改
 项目采用穿山甲的短剧资源和广告SDK，具体配置请参考[穿山甲文档](https://www.csjplatform.com/union/media/union/download/contentDynamic)进行配置，作者仅处理项目自身的功能问题和bug修复，如需提供付费技术协助（200元/次）请加微信:dxmcpjl，添加请备注：短剧技术协助，作者会及时回复
@@ -56,8 +56,8 @@
 
 如果您有开发类的需求，可以随时联系我，我擅长Android、Java等开发，可以以个人或公司名义接单，提供靠谱的开发服务。
 
-| ![输入图片说明](pictures/6f4e4459ef7777c93b1e6ad351e2d96.jpg) | ![输入图片说明](pictures/751b466d70425e942fd25318c4c68b6.jpg) |  ![输入图片说明](pictures/dd1fae18c9c1bf30d50070e951dfe39.jpg) |![输入图片说明](pictures/54a5061995e4cd45dbc2be36e4dd8d0.jpg) |
-|---------------------------------------------------------|---------------------------------------------------|---|---|
+| ![输入图片说明](picture/6f4e4459ef7777c93b1e6ad351e2d96.jpg) | ![输入图片说明](picture/751b466d70425e942fd25318c4c68b6.jpg) |  ![输入图片说明](picture/dd1fae18c9c1bf30d50070e951dfe39.jpg) |![输入图片说明](picture/54a5061995e4cd45dbc2be36e4dd8d0.jpg) |
+|--------------------------------------------------------|---------------------------------------------------|---|---|
 
 ## 已获得商用授权
 - [小码哥](https://profile.zjurl.cn/rogue/ugc/profile/?active_tab=dongtai&app_name=news_article&device_id=65&media_id=1560010410715137&request_source=1&share_token=19d46fa6-06bb-450c-a579-4e492e2e58e8&tt_from=copy_link&user_id=6320495657&utm_campaign=client_share&utm_medium=toutiao_android&utm_source=copy_link&version_code=988&version_name=90808)
