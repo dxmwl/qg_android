@@ -56,9 +56,10 @@
 
 如果您有开发类的需求，可以随时联系我，我擅长Android、Java等开发，可以以个人或公司名义接单，提供靠谱的开发服务。
 
-| ![输入图片说明](picture/6f4e4459ef7777c93b1e6ad351e2d96.jpg) | ![输入图片说明](picture/751b466d70425e942fd25318c4c68b6.jpg) |  ![输入图片说明](picture/dd1fae18c9c1bf30d50070e951dfe39.jpg) |![输入图片说明](picture/54a5061995e4cd45dbc2be36e4dd8d0.jpg) |
-|--------------------------------------------------------|---------------------------------------------------|---|---|
+| ![微信图片_20241217224327.jpg](picture/微信图片_20241217224327.jpg)|![输入图片说明](picture/微信图片_20241217224556.jpg) | ![输入图片说明](picture/微信图片_20241217225013.jpg) |  ![输入图片说明](picture/微信图片_20241217225117.jpg) |
+|-------------------------------------------------------------------------------------------------------|---------------------------------------------------|---|---|
 
 ## 已获得商用授权
 - [小码哥](https://profile.zjurl.cn/rogue/ugc/profile/?active_tab=dongtai&app_name=news_article&device_id=65&media_id=1560010410715137&request_source=1&share_token=19d46fa6-06bb-450c-a579-4e492e2e58e8&tt_from=copy_link&user_id=6320495657&utm_campaign=client_share&utm_medium=toutiao_android&utm_source=copy_link&version_code=988&version_name=90808)
 - [TheDustJa](https://github.com/TheDustJa)
+- [白阳]
